@@ -1,12 +1,28 @@
-function App() {
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import { LoginPage } from './pages/auth/LoginPage';
+import './App.css';
 
-  return (
-    <>
-        <section>
-            <div className="font-bold flex justify-center">Admin Dashboard</div>
-        </section>
-    </>
-  )
+function App() {
+    return (
+        <BrowserRouter>
+            <AuthProvider>
+                <Routes>
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route
+                        path="/*"
+                        element={
+                            <ProtectedRoute>
+                                <div>Dashboard placeholder</div>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+            </AuthProvider>
+        </BrowserRouter>
+    );
 }
 
-export default App
+export default App;
