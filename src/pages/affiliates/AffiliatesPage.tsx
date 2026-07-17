@@ -5,9 +5,9 @@ import {
 	deleteAffiliate,
 } from '../../api/affiliates';
 import type { Affiliate, AffiliateStatusFilter } from '../../types';
-import { statusColors } from '../../assets/colors';
+import { affiliatesStatusColors } from '../../assets/colors';
 import { Pagination } from '../../components/shared/Pagination';
-import { StatusFilter  } from '../../components/shared/StatusFilter';
+import { StatusFilter } from '../../components/shared/StatusFilter';
 
 export const AffiliatesPage = () => {
 	const [affiliates, setAffiliates] = useState<Affiliate[]>([]);
@@ -16,8 +16,8 @@ export const AffiliatesPage = () => {
 	const [totalPages, setTotalPages] = useState(1);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
-	const [statusFilter, setStatusFilter] = useState<AffiliateStatusFilter>('all');
-
+	const [statusFilter, setStatusFilter] =
+		useState<AffiliateStatusFilter>('all');
 
 	const fetchAffiliates = async (pageNumber = 1) => {
 		setLoading(true);
@@ -79,7 +79,11 @@ export const AffiliatesPage = () => {
 			<div className="flex items-center justify-between mb-6">
 				<h1 className="text-2xl font-bold text-gray-800">Affiliates</h1>
 				<div className="flex justify-end items-center">
-					<StatusFilter statusFilter={statusFilter} setStatusFilter={setStatusFilter} setPage={setPage}/>
+					<StatusFilter
+						statusFilter={statusFilter}
+						setStatusFilter={setStatusFilter}
+						setPage={setPage}
+					/>
 				</div>
 			</div>
 
@@ -136,7 +140,7 @@ export const AffiliatesPage = () => {
 								</td>
 								<td className="px-6 py-4">
 									<span
-										className={`px-2 py-1 rounded-full text-xs font-medium ${statusColors[affiliate.status]}`}
+										className={`px-2 py-1 rounded-full text-xs font-medium ${affiliatesStatusColors[affiliate.status]}`}
 									>
 										{affiliate.status}
 									</span>
@@ -185,7 +189,13 @@ export const AffiliatesPage = () => {
 					</div>
 				)}
 			</div>
-			<Pagination page={page} totalPages={totalPages} onPageChange={setPage} totalItems={total} items={affiliates.length} />
+			<Pagination
+				page={page}
+				totalPages={totalPages}
+				onPageChange={setPage}
+				totalItems={total}
+				items={affiliates.length}
+			/>
 		</div>
 	);
 };

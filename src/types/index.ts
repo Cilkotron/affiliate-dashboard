@@ -66,3 +66,28 @@ export interface StatusFilterProps {
     setStatusFilter: Dispatch<SetStateAction<AffiliateStatusFilter>>;
     setPage: Dispatch<SetStateAction<number>>;
 }
+
+/** Programs */
+export interface Program {
+    id: number;
+    name: string;
+    description?: string;
+    commission_rate: number;
+    status: 'active' | 'inactive';
+    created_at: string;
+    version: number;
+}
+export type ProgramFormData = {
+    name: string;
+    description: string;
+    commission_rate: number;
+    status: 'active' | 'inactive';
+}
+
+export interface ProgramFormProps {
+	form: ProgramFormData;
+	onChange: (form: ProgramFormData) => void;
+	onSubmit: (e: React.SubmitEvent) => void;
+	onCancel: () => void;
+	isEditing: boolean;
+}
