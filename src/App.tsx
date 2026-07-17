@@ -3,6 +3,7 @@ import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { LoginPage } from './pages/auth/LoginPage';
 import { Layout } from './components/layout/Layout';
+import { AffiliatesPage  } from './pages/affiliates/AffiliatesPage';
 
 function App() {
     return (
@@ -19,7 +20,7 @@ function App() {
                         }
                     >
                         <Route index element={<div className="text-gray-700">Dashboard coming soon...</div>} />
-                        <Route path="affiliates" element={<div className="text-gray-700">Affiliates coming soon...</div>} />
+                        <Route path="affiliates" element={<div className="text-gray-700"><AffiliatesPage /></div>} />
                         <Route path="programs" element={<div className="text-gray-700">Programs coming soon...</div>} />
                         <Route path="links" element={<div className="text-gray-700">Links coming soon...</div>} />
                         <Route path="clicks" element={<div className="text-gray-700">Clicks coming soon...</div>} />

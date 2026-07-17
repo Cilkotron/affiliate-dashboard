@@ -20,10 +20,10 @@ export const LoginPage = () => {
         try {
             const { user, token } = await login({ email, password });
 
-            // if (user.role !== 'admin') {
-            //     setError('Access denied. Admin only.');
-            //     return;
-            // }
+            if (user.role !== 'admin') {
+                setError('Access denied. Admin only.');
+                return;
+            }
 
             setAuth(user, token);
             navigate('/');
