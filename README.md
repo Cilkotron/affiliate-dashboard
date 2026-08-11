@@ -1,75 +1,90 @@
-# React + TypeScript + Vite
+# Affiliate Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A role-based admin and affiliate dashboard built with React, TypeScript, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- React Router v7
+- Axios
+- Vite
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Admin
+- View and manage affiliates (approve / reject / delete)
+- Full CRUD for affiliate programs
+- View all links, clicks, conversions, and payouts
+- Mark payouts as paid
 
-## Expanding the ESLint configuration
+### Affiliate
+- View and join / leave active programs
+- Create and manage tracking links
+- View own clicks, conversions, and payouts
+- Request payouts
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Prerequisites
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Node.js >= 18
+- Affiliate API running locally or deployed
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Installation
 
-```
+1. Clone the repo
+   git clone https://github.com/your-username/affiliate-dashboard.git
+   cd affiliate-dashboard
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Install dependencies
+   npm install
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+3. Set up environment variables
+   cp .env.example .env
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+4. Start the development server
+   npm run dev
 
-```
+## Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| VITE_API_URL | Base URL of the Affiliate API (e.g. http://localhost:3000/api) |
+
+## Project Structure
+
+src/
+├── api/ # Axios API calls
+├── assets/ # Icons and colors
+├── components/ # Reusable components
+│ ├── layout/ # Sidebar, Navbar, Layout
+│ ├── links/ # Link-specific components
+│ ├── programs/ # Program-specific components
+│ └── shared/ # Modal, Pagination, etc.
+├── context/ # Auth context
+├── pages/ # Page components
+└── types/ # TypeScript interfaces
+
+## Role-Based Access
+
+| Feature | Admin | Affiliate |
+|---------|-------|-----------|
+| View all affiliates | ✅ | ❌ |
+| Approve / reject affiliates | ✅ | ❌ |
+| Manage programs | ✅ | ❌ |
+| Join / leave programs | ❌ | ✅ |
+| View all links | ✅ | ❌ |
+| Create / manage own links | ❌ | ✅ |
+| View all clicks | ✅ | ❌ |
+| View own clicks | ❌ | ✅ |
+| View all conversions | ✅ | ❌ |
+| View own conversions | ❌ | ✅ |
+| View all payouts | ✅ | ❌ |
+| Request payout | ❌ | ✅ |
+| Mark payout as paid | ✅ | ❌ |
+
+## Related
+
+- [Affiliate API](https://github.com/Cilkotron/affiliate-api) — Backend REST API
