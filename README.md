@@ -55,17 +55,19 @@ A role-based admin and affiliate dashboard built with React, TypeScript, and Tai
 
 ## Project Structure
 
+```
 src/
-├── api/ # Axios API calls
-├── assets/ # Icons and colors
-├── components/ # Reusable components
-│ ├── layout/ # Sidebar, Navbar, Layout
-│ ├── links/ # Link-specific components
-│ ├── programs/ # Program-specific components
-│ └── shared/ # Modal, Pagination, etc.
-├── context/ # Auth context
-├── pages/ # Page components
-└── types/ # TypeScript interfaces
+├── api/              # Axios API calls
+├── assets/           # Icons and colors
+├── components/       # Reusable components
+│   ├── layout/       # Sidebar, Navbar, Layout
+│   ├── links/        # Link-specific components
+│   ├── programs/     # Program-specific components
+│   └── shared/       # Modal, Pagination, etc.
+├── context/          # Auth context
+├── pages/            # Page components
+└── types/            # TypeScript interfaces
+```
 
 ## Role-Based Access
 
