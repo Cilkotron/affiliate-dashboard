@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
 import {
 	getPrograms,
 	createProgram,
 	updateProgram,
 	deleteProgram,
 } from '../../api/programs';
-import type { Program } from '../../types';
+import type { Program, AffiliateProgram } from '../../types';
 import { programsStatusColors } from '../../assets/colors';
 import { Modal } from '../../components/shared/Modal';
 import { ProgramForm } from '../../components/programs/ProgramForm';
@@ -17,6 +18,12 @@ const emptyForm = {
 	status: 'active' as 'active' | 'inactive',
 };
 
+import {
+	joinProgram,
+	leaveProgram,
+	getMyPrograms,
+} from '../../api/affiliatePrograms';
+
 export const ProgramsPage = () => {
 	const [programs, setPrograms] = useState<Program[]>([]);
 	const [loading, setLoading] = useState(true);
@@ -24,6 +31,32 @@ export const ProgramsPage = () => {
 	const [showModal, setShowModal] = useState(false);
 	const [editing, setEditing] = useState<Program | null>(null);
 	const [form, setForm] = useState(emptyForm);
+	const { user } = useAuth();
+	const isAdmin = user?.role === 'admin';
+
+	const [myPrograms, setMyPrograms] = useState<AffiliateProgram[]>([]);
+
+	const isJoined = (program_id: number) =>
+		myPrograms.some((p) => p.program_id === program_id);
+
+	const handleJoin = async (program_id: number) => {
+		try {
+			await joinProgram(program_id);
+			const updated = await getMyPrograms();
+			setMyPrograms(updated);
+		} catch {
+			setError('Failed to join program');
+		}
+	};
+
+	const handleLeave = async (program_id: number) => {
+		try {
+			await leaveProgram(program_id);
+			setMyPrograms((prev) => prev.filter((p) => p.program_id !== program_id));
+		} catch {
+			setError('Failed to leave program');
+		}
+	};
 
 	const fetchPrograms = async () => {
 		try {
@@ -50,7 +83,7 @@ export const ProgramsPage = () => {
 		setEditing(program);
 		setForm({
 			name: program.name,
-			description: program.description ?? '', // undefined → ''
+			description: program.description ?? '',
 			commission_rate: program.commission_rate,
 			status: program.status,
 		});
@@ -94,12 +127,14 @@ export const ProgramsPage = () => {
 		<div>
 			<div className="flex items-center justify-between mb-6">
 				<h1 className="text-2xl font-bold text-gray-800">Programs</h1>
-				<button
-					onClick={openCreate}
-					className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-blue-700"
-				>
-					+ New Program
-				</button>
+				{isAdmin && (
+					<button
+						onClick={openCreate}
+						className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-blue-700"
+					>
+						+ New Program
+					</button>
+				)}
 			</div>
 
 			{error && (
@@ -127,6 +162,7 @@ export const ProgramsPage = () => {
 							<th className="text-left px-6 py-3 text-gray-500 font-medium">
 								Created
 							</th>
+
 							<th className="text-left px-6 py-3 text-gray-500 font-medium">
 								Actions
 							</th>
@@ -157,20 +193,37 @@ export const ProgramsPage = () => {
 									{new Date(program.created_at).toLocaleDateString()}
 								</td>
 								<td className="px-6 py-4">
-									<div className="flex items-center gap-2">
+									{isAdmin ? (
+										<div className="flex items-center gap-2">
+											<button
+												onClick={() => openEdit(program)}
+												className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
+											>
+												Edit
+											</button>
+											<button
+												onClick={() => handleDelete(program.id)}
+												className="text-xs px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200"
+											>
+												Delete
+											</button>
+										</div>
+									) : isJoined(program.id) ? (
 										<button
-											onClick={() => openEdit(program)}
-											className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
-										>
-											Edit
-										</button>
-										<button
-											onClick={() => handleDelete(program.id)}
+											onClick={() => handleLeave(program.id)}
 											className="text-xs px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200"
 										>
-											Delete
+											Leave
 										</button>
-									</div>
+									) : (
+										<button
+											onClick={() => handleJoin(program.id)}
+											className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded hover:bg-green-200"
+											disabled={program.status === 'inactive'}
+										>
+											Join
+										</button>
+									)}
 								</td>
 							</tr>
 						))}

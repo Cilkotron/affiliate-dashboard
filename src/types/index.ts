@@ -46,6 +46,15 @@ export interface AffiliatesResponse {
     pagination: Pagination;
 }
 
+export interface AffiliateProgram {
+    id: number;
+    program_id: number;
+    name: string;
+    commission_rate: number;
+    status: 'active' | 'inactive';
+    joined_at: string;
+}
+
 /** Shared */
 export interface Pagination {
     page: number;
@@ -57,7 +66,7 @@ export interface PaginationProps {
     page: number;
     totalPages: number;
     totalItems: number;
-    items: number;
+    pageSize: number;
     onPageChange: (page: number) => void;
 }
 
@@ -90,4 +99,23 @@ export interface ProgramFormProps {
 	onSubmit: (e: React.SubmitEvent) => void;
 	onCancel: () => void;
 	isEditing: boolean;
+}
+
+
+/** Links */
+export interface Link {
+    id: number;
+    affiliate_id: number;
+    program_id: number;
+    slug: string;
+    original_url: string;
+    created_at: Date;
+    program: string;
+    affiliate_first_name?: string;
+    affiliate_last_name?: string;
+}
+
+export interface LinkResponse {
+    data: Link[];
+    pagination: Pagination;
 }

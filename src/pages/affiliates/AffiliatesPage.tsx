@@ -16,8 +16,7 @@ export const AffiliatesPage = () => {
 	const [totalPages, setTotalPages] = useState(1);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
-	const [statusFilter, setStatusFilter] =
-		useState<AffiliateStatusFilter>('all');
+	const [statusFilter, setStatusFilter] = useState<AffiliateStatusFilter>('all');
 
 	const fetchAffiliates = async (pageNumber = 1) => {
 		setLoading(true);
@@ -194,7 +193,7 @@ export const AffiliatesPage = () => {
 				totalPages={totalPages}
 				onPageChange={setPage}
 				totalItems={total}
-				items={affiliates.length}
+				pageSize={affiliates.length}
 			/>
 		</div>
 	);
