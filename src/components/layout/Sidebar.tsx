@@ -11,7 +11,7 @@ import {
 	LogoutIcon,
 } from '../../assets/icons';
 
-const links = [
+const adminLinks = [
 	{ to: '/', label: 'Dashboard', icon: <DashboardIcon /> },
 	{ to: '/affiliates', label: 'Affiliates', icon: <AffiliatesIcon /> },
 	{ to: '/programs', label: 'Programs', icon: <ProgramsIcon /> },
@@ -21,13 +21,26 @@ const links = [
 	{ to: '/payouts', label: 'Payouts', icon: <PayoutsIcon /> },
 ];
 
+const affiliateLinks = [
+	{ to: '/', label: 'Dashboard', icon: <DashboardIcon /> },
+	{ to: '/programs', label: 'Programs', icon: <ProgramsIcon /> },
+	{ to: '/links', label: 'Links', icon: <LinksIcon /> },
+	{ to: '/clicks', label: 'Clicks', icon: <ClicksIcon /> },
+	{ to: '/conversions', label: 'Conversions', icon: <ConversionsIcon /> },
+	{ to: '/payouts', label: 'Payouts', icon: <PayoutsIcon /> },
+];
+
 export const Sidebar = () => {
-	const { clearAuth } = useAuth();
+	const { user } = useAuth();
+	const isAdmin = user?.role === 'admin';
+	const links = isAdmin ? adminLinks : affiliateLinks;
 
 	return (
 		<aside className="w-64 bg-gray-900 min-h-screen flex flex-col">
 			<div className="p-6 border-b border-gray-700">
-				<h1 className="text-white font-bold text-xl">Affiliate Admin</h1>
+				<h1 className="text-white font-bold text-xl">
+					{isAdmin ? 'Affiliate Admin' : 'Affiliate Dashboard'}
+				</h1>
 			</div>
 
 			<nav className="flex-1 p-4 space-y-1">
@@ -49,18 +62,6 @@ export const Sidebar = () => {
 					</NavLink>
 				))}
 			</nav>
-
-			<div className="p-4 border-t border-gray-700">
-				<button
-					onClick={clearAuth}
-					className="w-full text-left flex items-center gap-3 px-4 py-2.5 rounded text-sm text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
-				>
-					<span className="w-5 h-5">
-						<LogoutIcon />
-					</span>
-					<span>Logout</span>
-				</button>
-			</div>
 		</aside>
 	);
 };

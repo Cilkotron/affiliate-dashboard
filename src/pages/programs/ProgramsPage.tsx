@@ -9,7 +9,7 @@ import {
 import type { Program, AffiliateProgram } from '../../types';
 import { programsStatusColors } from '../../assets/colors';
 import { Modal } from '../../components/shared/Modal';
-import { ProgramForm } from '../../components/programs/ProgramForm';
+import { ProgramForm } from './ProgramForm';
 
 const emptyForm = {
 	name: '',
@@ -33,6 +33,10 @@ export const ProgramsPage = () => {
 	const [form, setForm] = useState(emptyForm);
 	const { user } = useAuth();
 	const isAdmin = user?.role === 'admin';
+
+	const visiblePrograms = isAdmin
+		? programs
+		: programs.filter((p) => p.status === 'active');
 
 	const [myPrograms, setMyPrograms] = useState<AffiliateProgram[]>([]);
 
@@ -71,7 +75,10 @@ export const ProgramsPage = () => {
 
 	useEffect(() => {
 		fetchPrograms();
-	}, []);
+		if (!isAdmin) {
+			getMyPrograms().then(setMyPrograms);
+		}
+	}, [isAdmin]);
 
 	const openCreate = () => {
 		setEditing(null);
@@ -156,9 +163,11 @@ export const ProgramsPage = () => {
 							<th className="text-left px-6 py-3 text-gray-500 font-medium">
 								Commission
 							</th>
-							<th className="text-left px-6 py-3 text-gray-500 font-medium">
-								Status
-							</th>
+							{isAdmin && (
+								<th className="text-left px-6 py-3 text-gray-500 font-medium">
+									Status
+								</th>
+							)}
 							<th className="text-left px-6 py-3 text-gray-500 font-medium">
 								Created
 							</th>
@@ -169,7 +178,7 @@ export const ProgramsPage = () => {
 						</tr>
 					</thead>
 					<tbody className="divide-y divide-gray-100">
-						{programs.map((program) => (
+						{visiblePrograms.map((program) => (
 							<tr key={program.id} className="hover:bg-gray-50">
 								<td className="px-6 py-4 font-medium text-gray-800">
 									{program.name}
@@ -182,13 +191,15 @@ export const ProgramsPage = () => {
 								<td className="px-6 py-4 text-gray-800 font-medium">
 									{program.commission_rate}%
 								</td>
-								<td className="px-6 py-4">
-									<span
-										className={`px-2 py-1 rounded-full text-xs font-medium ${programsStatusColors[program.status]}`}
-									>
-										{program.status}
-									</span>
-								</td>
+								{isAdmin && (
+									<td className="px-6 py-4">
+										<span
+											className={`px-2 py-1 rounded-full text-xs font-medium ${programsStatusColors[program.status]}`}
+										>
+											{program.status}
+										</span>
+									</td>
+								)}
 								<td className="px-6 py-4 text-gray-500">
 									{new Date(program.created_at).toLocaleDateString()}
 								</td>

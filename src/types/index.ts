@@ -50,7 +50,7 @@ export interface AffiliateProgram {
     id: number;
     program_id: number;
     name: string;
-    commission_rate: number;
+    commission_rate: string;
     status: 'active' | 'inactive';
     joined_at: string;
 }
