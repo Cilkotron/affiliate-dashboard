@@ -8,11 +8,10 @@ import {
 	createLink,
 } from '../../api/links';
 import { getMyPrograms } from '../../api/affiliatePrograms';
-import type { Link } from '../../types';
+import type { Link, AffiliateProgram } from '../../types';
 import { Pagination } from '../../components/shared/Pagination';
 import { Modal } from '../../components/shared/Modal';
 import { LinkForm } from '../links/LinkForm';
-import type { AffiliateProgram } from '../../types';
 
 export const LinksPage = () => {
 	const [links, setLinks] = useState<Link[]>([]);
@@ -35,6 +34,7 @@ export const LinksPage = () => {
 				? await getLinks(pageNumber, 10)
 				: await getMyLinks(pageNumber, 10);
 			setLinks(response.data);
+			console.log(response);
 			setPage(response.pagination.page);
 			setTotalPages(response.pagination.totalPages);
 			setTotal(response.pagination.total);
@@ -52,7 +52,7 @@ export const LinksPage = () => {
 			const newLink = await createLink(data.program_id, data.original_url);
 			setLinks((prev) => [newLink, ...prev]);
 			setShowModal(false);
-            await fetchLinks(page);
+			await fetchLinks(page);
 		} catch {
 			setError('Failed to create link');
 		}
@@ -69,7 +69,7 @@ export const LinksPage = () => {
 	};
 
 	useEffect(() => {
-		fetchLinks();
+		fetchLinks(page);
 		if (!isAdmin) {
 			setProgramsLoading(true);
 			getMyPrograms()
@@ -77,7 +77,7 @@ export const LinksPage = () => {
 				.catch(() => setError('Failed to load programs'))
 				.finally(() => setProgramsLoading(false));
 		}
-	}, [isAdmin]);
+	}, [page, isAdmin]);
 
 	if (loading) return <div className="text-gray-500">Loading...</div>;
 
@@ -111,7 +111,7 @@ export const LinksPage = () => {
 							<th className="text-left px-6 py-3 text-gray-500 font-medium">
 								Original URL
 							</th>
-							{ isAdmin && (
+							{isAdmin && (
 								<th className="text-left px-6 py-3 text-gray-500 font-medium">
 									Affiliate
 								</th>
@@ -133,7 +133,7 @@ export const LinksPage = () => {
 								<td className="px-6 py-4 text-gray-600 max-w-xs truncate">
 									{link.original_url}
 								</td>
-								{ isAdmin && (
+								{isAdmin && (
 									<td className="px-6 py-4 text-gray-800 font-medium">
 										{link.affiliate_first_name} {link.affiliate_last_name}
 									</td>

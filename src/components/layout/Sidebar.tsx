@@ -8,7 +8,7 @@ import {
 	ClicksIcon,
 	ConversionsIcon,
 	PayoutsIcon,
-	LogoutIcon,
+	//LogoutIcon,
 } from '../../assets/icons';
 
 const adminLinks = [

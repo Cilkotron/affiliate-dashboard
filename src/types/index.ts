@@ -1,97 +1,89 @@
 import type { Dispatch, SetStateAction } from 'react';
 
-
 /** Users */
 export interface User {
-    id: number;
-    email: string;
-    role: 'admin' | 'affiliate';
+	id: number;
+	email: string;
+	role: 'admin' | 'affiliate';
 }
 
 export interface AuthResponse {
-    user: User;
-    token: string;
+	user: User;
+	token: string;
 }
 
 export interface LoginCredentials {
-    email: string;
-    password: string;
+	email: string;
+	password: string;
 }
 
 /** Affiliates  */
-export type AffiliateStatus = 
-    'pending' | 'approved' | 'rejected'; 
-
+export type AffiliateStatus = 'pending' | 'approved' | 'rejected';
 
 export interface Affiliate {
-    id: number;
-    user_id: number; 
-    first_name: string; 
-    last_name: string; 
-    website?: string; 
-    status: AffiliateStatus;
-    created_at: string;
-    email?: string; 
-    version: number;
+	id: number;
+	user_id: number;
+	first_name: string;
+	last_name: string;
+	website?: string;
+	status: AffiliateStatus;
+	created_at: string;
+	email?: string;
+	version: number;
 }
-export type AffiliateStatusFilter =
-    | 'all'
-    | 'pending'
-    | 'approved'
-    | 'rejected';
-
+export type AffiliateStatusFilter = 'all' | 'pending' | 'approved' | 'rejected';
 
 export interface AffiliatesResponse {
-    data: Affiliate[];
-    pagination: Pagination;
+	data: Affiliate[];
+	pagination: Pagination;
 }
 
 export interface AffiliateProgram {
-    id: number;
-    program_id: number;
-    name: string;
-    commission_rate: string;
-    status: 'active' | 'inactive';
-    joined_at: string;
+	id: number;
+	program_id: number;
+	name: string;
+	commission_rate: string;
+	status: 'active' | 'inactive';
+	joined_at: string;
 }
 
 /** Shared */
 export interface Pagination {
-    page: number;
-    limit: number;
-    total: number;
-    totalPages: number;
+	page: number;
+	limit: number;
+	total: number;
+	totalPages: number;
 }
 export interface PaginationProps {
-    page: number;
-    totalPages: number;
-    totalItems: number;
-    pageSize: number;
-    onPageChange: (page: number) => void;
+	page: number;
+	totalPages: number;
+	totalItems: number;
+	pageSize: number;
+	onPageChange: (page: number) => void;
 }
 
 export interface StatusFilterProps {
-    statusFilter: AffiliateStatusFilter;
-    setStatusFilter: Dispatch<SetStateAction<AffiliateStatusFilter>>;
-    setPage: Dispatch<SetStateAction<number>>;
+	statusFilter: AffiliateStatusFilter;
+	setStatusFilter: Dispatch<SetStateAction<AffiliateStatusFilter>>;
+	setPage: Dispatch<SetStateAction<number>>;
 }
 
 /** Programs */
 export interface Program {
-    id: number;
-    name: string;
-    description?: string;
-    commission_rate: number;
-    status: 'active' | 'inactive';
-    created_at: string;
-    version: number;
+	id: number;
+	name: string;
+	description?: string;
+	commission_rate: number;
+	status: 'active' | 'inactive';
+	created_at: string;
+	version: number;
 }
 export type ProgramFormData = {
-    name: string;
-    description: string;
-    commission_rate: number;
-    status: 'active' | 'inactive';
-}
+	name: string;
+	description: string;
+	commission_rate: number;
+	status: 'active' | 'inactive';
+};
 
 export interface ProgramFormProps {
 	form: ProgramFormData;
@@ -101,21 +93,39 @@ export interface ProgramFormProps {
 	isEditing: boolean;
 }
 
-
 /** Links */
 export interface Link {
-    id: number;
-    affiliate_id: number;
-    program_id: number;
-    slug: string;
-    original_url: string;
-    created_at: Date;
-    program: string;
-    affiliate_first_name?: string;
-    affiliate_last_name?: string;
+	id: number;
+	affiliate_id: number;
+	program_id: number;
+	slug: string;
+	original_url: string;
+	created_at: Date;
+	program: string;
+	affiliate_first_name?: string;
+	affiliate_last_name?: string;
 }
 
 export interface LinkResponse {
-    data: Link[];
-    pagination: Pagination;
+	data: Link[];
+	pagination: Pagination;
+}
+
+/** Click */
+
+export interface Click {
+	id: number;
+	ip_address?: string;
+	user_agent?: string;
+	clicked_at: Date;
+	slug: string;
+	original_url: string;
+	first_name: string;
+	last_name: string;
+	program_name: string;
+}
+
+export interface ClickResponse {
+	data: Click[];
+	pagination: Pagination;
 }
