@@ -25,39 +25,41 @@ export const Pagination = ({
 
 	return (
 		<>
-			<div className="flex justify-center gap-2 py-2">
-				{totalPages > 5 && (
-					<button
-						onClick={() => onPageChange(page - 1)}
-						disabled={page === 1}
-						className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
-					>
-						Previous
-					</button>
-				)}
+			{totalPages > 1 && (
+				<div className="flex justify-center gap-2 py-2">
+					{totalPages > 5 && (
+						<button
+							onClick={() => onPageChange(page - 1)}
+							disabled={page === 1}
+							className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
+						>
+							Previous
+						</button>
+					)}
 
-				{visiblePages.map((pageNumber) => (
-					<button
-						key={pageNumber}
-						onClick={() => onPageChange(pageNumber)}
-						className={`px-3 py-1 rounded ${
-							page === pageNumber ? 'bg-blue-600 text-white' : 'bg-gray-200'
-						}`}
-					>
-						{pageNumber}
-					</button>
-				))}
+					{visiblePages.map((pageNumber) => (
+						<button
+							key={pageNumber}
+							onClick={() => onPageChange(pageNumber)}
+							className={`px-3 py-1 rounded ${
+								page === pageNumber ? 'bg-blue-600 text-white' : 'bg-gray-200'
+							}`}
+						>
+							{pageNumber}
+						</button>
+					))}
 
-				{totalPages > 5 && (
-					<button
-						onClick={() => onPageChange(page + 1)}
-						disabled={page === totalPages}
-						className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
-					>
-						Next
-					</button>
-				)}
-			</div>
+					{totalPages > 5 && (
+						<button
+							onClick={() => onPageChange(page + 1)}
+							disabled={page === totalPages}
+							className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
+						>
+							Next
+						</button>
+					)}
+				</div>
+			)}
 
 			<div className="flex justify-center pt-2">
 				<span className="text-xs text-gray-400">

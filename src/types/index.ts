@@ -1,5 +1,3 @@
-import type { Dispatch, SetStateAction } from 'react';
-
 /** Users */
 export interface User {
 	id: number;
@@ -62,10 +60,17 @@ export interface PaginationProps {
 	onPageChange: (page: number) => void;
 }
 
-export interface StatusFilterProps {
-	statusFilter: AffiliateStatusFilter;
-	setStatusFilter: Dispatch<SetStateAction<AffiliateStatusFilter>>;
-	setPage: Dispatch<SetStateAction<number>>;
+// export interface StatusFilterProps {
+// 	statusFilter: AffiliateStatusFilter;
+// 	setStatusFilter: Dispatch<SetStateAction<AffiliateStatusFilter>>;
+// 	setPage: Dispatch<SetStateAction<number>>;
+// }
+
+export interface StatusFilterProps<T extends string> {
+    statuses: Exclude<T, 'all'>[];
+    statusFilter: T;
+    setStatusFilter: (status: T) => void;
+    setPage: (page: number) => void;
 }
 
 /** Programs */
@@ -120,8 +125,8 @@ export interface Click {
 	clicked_at: Date;
 	slug: string;
 	original_url: string;
-	first_name: string;
-	last_name: string;
+	first_name?: string;
+	last_name?: string;
 	program_name: string;
 }
 
@@ -129,3 +134,25 @@ export interface ClickResponse {
 	data: Click[];
 	pagination: Pagination;
 }
+
+/** Conversions */
+export type ConversionStatusFilter = 'all' | 'paid' | 'pending' | 'approved';
+
+export type ConversionStatus = 'paid' | 'pending' | 'approved';
+
+export interface Conversion {
+    id: number; 
+    amount: string;
+    commission: string;
+    status: ConversionStatus;
+    created_at: Date;
+    first_name?: string;
+    last_name?: string;
+    program_name: string;
+}
+
+export interface ConversionResponse {
+	data: Conversion[];
+	pagination: Pagination;
+}
+

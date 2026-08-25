@@ -16,7 +16,8 @@ export const AffiliatesPage = () => {
 	const [totalPages, setTotalPages] = useState(1);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState('');
-	const [statusFilter, setStatusFilter] = useState<AffiliateStatusFilter>('all');
+	const [statusFilter, setStatusFilter] =
+		useState<AffiliateStatusFilter>('all');
 
 	const fetchAffiliates = async (pageNumber = 1) => {
 		setLoading(true);
@@ -78,7 +79,8 @@ export const AffiliatesPage = () => {
 			<div className="flex items-center justify-between mb-6">
 				<h1 className="text-2xl font-bold text-gray-800">Affiliates</h1>
 				<div className="flex justify-end items-center">
-					<StatusFilter
+					<StatusFilter<AffiliateStatusFilter>
+						statuses={['pending', 'approved', 'rejected']}
 						statusFilter={statusFilter}
 						setStatusFilter={setStatusFilter}
 						setPage={setPage}

@@ -7,6 +7,7 @@ import { AffiliatesPage } from './pages/affiliates/AffiliatesPage';
 import { ProgramsPage } from './pages/programs/ProgramsPage';
 import { LinksPage } from './pages/links/LinksPage';
 import { ClicksPage } from './pages/clicks/ClicksPage';
+import { ConversionsPage  } from './pages/conversions/ConversionsPage';
 
 function App() {
 	return (
@@ -63,7 +64,9 @@ function App() {
 						<Route
 							path="conversions"
 							element={
-								<div className="text-gray-700">Conversions coming soon...</div>
+								<div className="text-gray-700">
+                                    <ConversionsPage />
+                                </div>
 							}
 						/>
 						<Route

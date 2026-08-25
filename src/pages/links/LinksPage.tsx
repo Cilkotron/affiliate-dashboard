@@ -34,7 +34,6 @@ export const LinksPage = () => {
 				? await getLinks(pageNumber, 10)
 				: await getMyLinks(pageNumber, 10);
 			setLinks(response.data);
-			console.log(response);
 			setPage(response.pagination.page);
 			setTotalPages(response.pagination.totalPages);
 			setTotal(response.pagination.total);
