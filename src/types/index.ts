@@ -60,11 +60,6 @@ export interface PaginationProps {
 	onPageChange: (page: number) => void;
 }
 
-// export interface StatusFilterProps {
-// 	statusFilter: AffiliateStatusFilter;
-// 	setStatusFilter: Dispatch<SetStateAction<AffiliateStatusFilter>>;
-// 	setPage: Dispatch<SetStateAction<number>>;
-// }
 
 export interface StatusFilterProps<T extends string> {
     statuses: Exclude<T, 'all'>[];
@@ -116,8 +111,7 @@ export interface LinkResponse {
 	pagination: Pagination;
 }
 
-/** Click */
-
+/** Clicks */
 export interface Click {
 	id: number;
 	ip_address?: string;
@@ -156,3 +150,21 @@ export interface ConversionResponse {
 	pagination: Pagination;
 }
 
+/** Payouts */
+export interface Payout {
+    id: number;
+    affiliate_id: number;
+    amount: string;
+    status: 'pending' | 'paid';
+    created_at: string;
+    paid_at: string | null;
+    first_name?: string;
+    last_name?: string;
+}
+
+export interface PayoutResponse {
+    data: Payout[];
+    pagination: Pagination;
+}
+
+export type PayoutStatusFilter = 'all' | 'pending' | 'paid';

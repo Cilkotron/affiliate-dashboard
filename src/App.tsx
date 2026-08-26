@@ -8,6 +8,7 @@ import { ProgramsPage } from './pages/programs/ProgramsPage';
 import { LinksPage } from './pages/links/LinksPage';
 import { ClicksPage } from './pages/clicks/ClicksPage';
 import { ConversionsPage  } from './pages/conversions/ConversionsPage';
+import { PayoutsPage } from './pages/payouts/PayoutsPage';
 
 function App() {
 	return (
@@ -72,7 +73,7 @@ function App() {
 						<Route
 							path="payouts"
 							element={
-								<div className="text-gray-700">Payouts coming soon...</div>
+								<div className="text-gray-700"><PayoutsPage /></div>
 							}
 						/>
 					</Route>

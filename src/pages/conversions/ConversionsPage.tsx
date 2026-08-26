@@ -7,7 +7,7 @@ import {
 } from '../../api/conversions';
 import type { Conversion, ConversionStatusFilter } from '../../types';
 import { Pagination } from '../../components/shared/Pagination';
-import { conversionsStatusColor } from '../../assets/colors';
+import { conversionsStatusColors } from '../../assets/colors';
 import { StatusFilter } from '../../components/shared/StatusFilter';
 
 export const ConversionsPage = () => {
@@ -121,7 +121,7 @@ export const ConversionsPage = () => {
 								</td>
 								<td className="px-6 py-4 text-gray-600 max-w-xs truncate">
 									<span
-										className={`px-2 py-1 rounded-full text-xs font-medium ${conversionsStatusColor[conversion.status]}`}
+										className={`px-2 py-1 rounded-full text-xs font-medium ${conversionsStatusColors[conversion.status]}`}
 									>
 										{conversion.status}
 									</span>

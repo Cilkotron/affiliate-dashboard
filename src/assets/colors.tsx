@@ -9,8 +9,13 @@ export const programsStatusColors = {
 	inactive: 'bg-gray-100 text-gray-600',
 };
 
-export const conversionsStatusColor = {
+export const conversionsStatusColors = {
     pending: 'bg-yellow-100 text-yellow-700',
     approved: 'bg-blue-100 text-blue-700',
     paid: 'bg-green-100 text-green-700',
+};
+
+export const payoutsStatusColors = {
+	pending: 'bg-yellow-100 text-yellow-700',
+	paid: 'bg-green-100 text-green-700',
 };
