@@ -1,6 +1,147 @@
-/* @import url('https://googleapis.com'); */
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Red+Hat+Display:wght@400;500;600;700&display=swap');
 
-body {
-  font-family: 'Red Hat Display', sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-gray-50 via-gray-50 to-slate-100 text-gray-900 antialiased;
+    font-family: 'Inter', 'Red Hat Display', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold tracking-tight;
+  }
+
+  h1 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl;
+  }
+}
+
+@layer components {
+  /* Modern button styles */
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-600 to-primary-700 text-white px-4 py-2 rounded-lg font-medium shadow-md hover:shadow-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-gray-700 px-4 py-2 rounded-lg font-medium border border-gray-300 shadow-sm hover:shadow-md hover:bg-gray-50 transition-all duration-200;
+  }
+
+  .btn-danger {
+    @apply bg-gradient-to-r from-error-500 to-error-600 text-white px-4 py-2 rounded-lg font-medium shadow-md hover:shadow-lg hover:from-error-600 hover:to-error-700 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-success {
+    @apply bg-gradient-to-r from-success-500 to-success-600 text-white px-4 py-2 rounded-lg font-medium shadow-md hover:shadow-lg hover:from-success-600 hover:to-success-700 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-sm {
+    @apply px-3 py-1.5 text-sm;
+  }
+
+  .btn-xs {
+    @apply px-2 py-1 text-xs;
+  }
+
+  /* Modern card styles */
+  .card {
+    @apply bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden;
+  }
+
+  .card-hover {
+    @apply hover:shadow-xl transition-shadow duration-300;
+  }
+
+  /* Modern input styles */
+  .input {
+    @apply w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 bg-white;
+  }
+
+  .input:focus {
+    @apply shadow-glow-sm;
+  }
+
+  /* Modern table styles */
+  .table-container {
+    @apply bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden;
+  }
+
+  .table {
+    @apply w-full text-sm;
+  }
+
+  .table thead {
+    @apply bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200;
+  }
+
+  .table th {
+    @apply text-left px-6 py-4 text-gray-600 font-semibold text-xs uppercase tracking-wider;
+  }
+
+  .table tbody tr {
+    @apply border-b border-gray-100 hover:bg-gradient-to-r hover:from-gray-50 hover:to-transparent transition-colors duration-150;
+  }
+
+  .table tbody tr:last-child {
+    @apply border-b-0;
+  }
+
+  .table td {
+    @apply px-6 py-4;
+  }
+
+  /* Modern badge styles */
+  .badge {
+    @apply px-3 py-1 rounded-full text-xs font-semibold inline-flex items-center gap-1.5;
+  }
+
+  .badge-success {
+    @apply bg-gradient-to-r from-success-100 to-success-200 text-success-700 border border-success-300;
+  }
+
+  .badge-warning {
+    @apply bg-gradient-to-r from-warning-100 to-warning-200 text-warning-700 border border-warning-300;
+  }
+
+  .badge-error {
+    @apply bg-gradient-to-r from-error-100 to-error-200 text-error-700 border border-error-300;
+  }
+
+  .badge-info {
+    @apply bg-gradient-to-r from-info-100 to-info-200 text-info-700 border border-info-300;
+  }
+
+  .badge-neutral {
+    @apply bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 border border-gray-300;
+  }
+
+  /* Glassmorphism effect */
+  .glass {
+    @apply bg-white/80 backdrop-blur-md border border-white/20;
+  }
+
+  .glass-dark {
+    @apply bg-gray-900/80 backdrop-blur-md border border-gray-700/50;
+  }
+
+  /* Loading skeleton */
+  .skeleton {
+    @apply bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 bg-[length:1000px_100%] animate-shimmer rounded;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }

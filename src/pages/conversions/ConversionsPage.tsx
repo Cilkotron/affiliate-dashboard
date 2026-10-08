@@ -9,6 +9,7 @@ import type { Conversion, ConversionStatusFilter } from '../../types';
 import { Pagination } from '../../components/shared/Pagination';
 import { conversionsStatusColors } from '../../assets/colors';
 import { StatusFilter } from '../../components/shared/StatusFilter';
+import { TableSkeleton } from '../../components/shared/Skeleton';
 
 export const ConversionsPage = () => {
 	const [conversions, setClick] = useState<Conversion[]>([]);
@@ -60,12 +61,15 @@ export const ConversionsPage = () => {
 		fetchconversions(page);
 	}, [page, statusFilter]);
 
-	if (loading) return <div className="text-gray-500">Loading...</div>;
+	if (loading) return <TableSkeleton />;
 
 	return (
-		<div>
+		<div className="animate-fade-in">
 			<div className="flex items-center justify-between mb-6">
-				<h1 className="text-2xl font-bold text-gray-800">Conversions</h1>
+				<div>
+					<h1 className="text-3xl font-display font-bold text-gray-900">Conversions</h1>
+					<p className="text-gray-500 mt-1">Track affiliate conversions</p>
+				</div>
 				<div className="flex justify-end items-center">
 					<StatusFilter<ConversionStatusFilter>
 						statuses={['pending', 'approved', 'paid']}
@@ -77,71 +81,58 @@ export const ConversionsPage = () => {
 			</div>
 
 			{error && (
-				<div className="bg-red-50 text-red-600 p-3 rounded mb-4 text-sm">
-					{error}
+				<div className="bg-gradient-to-r from-error-50 to-error-100 border border-error-200 text-error-700 p-4 rounded-xl mb-6 text-sm font-medium animate-slide-in">
+					<div className="flex items-center gap-2">
+						<svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						{error}
+					</div>
 				</div>
 			)}
 
-			<div className="bg-white rounded-lg shadow overflow-hidden">
-				<table className="w-full text-sm">
-					<thead className="bg-gray-50 border-b border-gray-200">
+			<div className="table-container">
+				<table className="table">
+					<thead>
 						<tr>
-							<th className="text-left px-6 py-3 text-gray-500 font-medium">
-								Amount
-							</th>
-							<th className="text-left px-6 py-3 text-gray-500 font-medium">
-								Commission
-							</th>
-							<th className="text-left px-6 py-3 text-gray-500 font-medium">
-								Status
-							</th>
-							{isAdmin && (
-								<th className="text-left px-6 py-3 text-gray-500 font-medium">
-									Affiliate
-								</th>
-							)}
-							<th className="text-left px-6 py-3 text-gray-500 font-medium">
-								Program
-							</th>
-							{isAdmin && (
-								<th className="text-left px-6 py-3 text-gray-500 font-medium">
-									Actions
-								</th>
-							)}
+							<th>Amount</th>
+							<th>Commission</th>
+							<th>Status</th>
+							{isAdmin && <th>Affiliate</th>}
+							<th>Program</th>
+							{isAdmin && <th>Actions</th>}
 						</tr>
 					</thead>
-					<tbody className="divide-y divide-gray-100">
+					<tbody>
 						{conversions.map((conversion) => (
-							<tr key={conversion.id} className="hover:bg-gray-50">
-								<td className="px-6 py-4 font-medium text-gray-800">
+							<tr key={conversion.id}>
+								<td className="font-semibold text-gray-900">
 									{conversion.amount}
 								</td>
-								<td className="px-6 py-4 text-gray-600 max-w-xs truncate">
+								<td className="text-gray-600 max-w-xs truncate">
 									{conversion.commission}
 								</td>
-								<td className="px-6 py-4 text-gray-600 max-w-xs truncate">
-									<span
-										className={`px-2 py-1 rounded-full text-xs font-medium ${conversionsStatusColors[conversion.status]}`}
-									>
+								<td className="text-gray-600 max-w-xs truncate">
+									<span className={`badge ${conversionsStatusColors[conversion.status]}`}>
 										{conversion.status}
 									</span>
 								</td>
 								{isAdmin && (
-									<td className="px-6 py-4 text-gray-800 font-medium">
+									<td className="text-gray-900 font-medium">
 										{conversion.first_name} {conversion.last_name}
 									</td>
 								)}
-								<td className="px-6 py-4">{conversion.program_name}</td>
+								<td className="text-gray-600">{conversion.program_name}</td>
 
 								{isAdmin && (
-									<td className="px-6 py-4">
+									<td>
 										<div className="flex items-center gap-2">
 											{conversion.status === 'pending' && (
 												<button
 													onClick={() =>
 														handleStatusUpdate(conversion.id, 'approved')
 													}
-													className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded hover:bg-green-200 cursor-pointer"
+													className="btn-xs btn-success"
 												>
 													Approve
 												</button>
@@ -151,13 +142,13 @@ export const ConversionsPage = () => {
 													onClick={() =>
 														handleStatusUpdate(conversion.id, 'paid')
 													}
-													className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 cursor-pointer"
+													className="btn-xs btn-primary"
 												>
 													Mark Paid
 												</button>
 											)}
 											{conversion.status === 'paid' && (
-												<span className="text-xs text-gray-400">Paid</span>
+												<span className="badge badge-neutral">Paid</span>
 											)}
 										</div>
 									</td>
@@ -168,8 +159,12 @@ export const ConversionsPage = () => {
 				</table>
 
 				{conversions.length === 0 && (
-					<div className="text-center py-12 text-gray-400">
-						No conversions found
+					<div className="text-center py-16">
+						<svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<p className="text-gray-500 font-medium">No conversions found</p>
+						<p className="text-gray-400 text-sm mt-1">Conversions will appear here when tracked</p>
 					</div>
 				)}
 			</div>

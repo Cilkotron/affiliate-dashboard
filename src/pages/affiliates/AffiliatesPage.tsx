@@ -8,6 +8,7 @@ import type { Affiliate, AffiliateStatusFilter } from '../../types';
 import { affiliatesStatusColors } from '../../assets/colors';
 import { Pagination } from '../../components/shared/Pagination';
 import { StatusFilter } from '../../components/shared/StatusFilter';
+import { TableSkeleton } from '../../components/shared/Skeleton';
 
 export const AffiliatesPage = () => {
 	const [affiliates, setAffiliates] = useState<Affiliate[]>([]);
@@ -72,12 +73,15 @@ export const AffiliatesPage = () => {
 		}
 	};
 
-	if (loading) return <div className="text-gray-500">Loading...</div>;
+	if (loading) return <TableSkeleton />;
 
 	return (
-		<div>
+		<div className="animate-fade-in">
 			<div className="flex items-center justify-between mb-6">
-				<h1 className="text-2xl font-bold text-gray-800">Affiliates</h1>
+				<div>
+					<h1 className="text-3xl font-display font-bold text-gray-900">Affiliates</h1>
+					<p className="text-gray-500 mt-1">Manage your affiliate partners</p>
+				</div>
 				<div className="flex justify-end items-center">
 					<StatusFilter<AffiliateStatusFilter>
 						statuses={['pending', 'approved', 'rejected']}
@@ -89,49 +93,42 @@ export const AffiliatesPage = () => {
 			</div>
 
 			{error && (
-				<div className="bg-red-50 text-red-600 p-3 rounded mb-4 text-sm">
-					{error}
+				<div className="bg-gradient-to-r from-error-50 to-error-100 border border-error-200 text-error-700 p-4 rounded-xl mb-6 text-sm font-medium animate-slide-in">
+					<div className="flex items-center gap-2">
+						<svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						{error}
+					</div>
 				</div>
 			)}
 
-			<div className="bg-white rounded-lg shadow overflow-hidden">
-				<table className="w-full text-sm">
-					<thead className="bg-gray-50 border-b border-gray-200">
+			<div className="table-container">
+				<table className="table">
+					<thead>
 						<tr>
-							<th className="text-left px-6 py-3 text-gray-500 font-medium">
-								Name
-							</th>
-							<th className="text-left px-6 py-3 text-gray-500 font-medium">
-								Email
-							</th>
-							<th className="text-left px-6 py-3 text-gray-500 font-medium">
-								Website
-							</th>
-							<th className="text-left px-6 py-3 text-gray-500 font-medium">
-								Status
-							</th>
-							<th className="text-left px-6 py-3 text-gray-500 font-medium">
-								Created
-							</th>
-							<th className="text-left px-6 py-3 text-gray-500 font-medium">
-								Actions
-							</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Website</th>
+							<th>Status</th>
+							<th>Created</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
-					<tbody className="divide-y divide-gray-100">
+					<tbody>
 						{affiliates.map((affiliate) => (
-							<tr key={affiliate.id} className="hover:bg-gray-50">
-								<td className="px-6 py-4 font-medium text-gray-800">
+							<tr key={affiliate.id}>
+								<td className="font-semibold text-gray-900">
 									{affiliate.first_name} {affiliate.last_name}
 								</td>
-								<td className="px-6 py-4 text-gray-600">{affiliate.email}</td>
-								<td className="px-6 py-4 text-gray-600">
+								<td className="text-gray-600">{affiliate.email}</td>
+								<td className="text-gray-600">
 									{affiliate.website ? (
 										<a
 											href={affiliate.website}
 											target="_blank"
 											rel="noreferrer"
-											className="text-blue-600 hover:underline"
+											className="text-primary-600 hover:text-primary-700 font-medium hover:underline transition-colors"
 										>
 											{affiliate.website}
 										</a>
@@ -139,24 +136,22 @@ export const AffiliatesPage = () => {
 										<span className="text-gray-400">—</span>
 									)}
 								</td>
-								<td className="px-6 py-4">
-									<span
-										className={`px-2 py-1 rounded-full text-xs font-medium ${affiliatesStatusColors[affiliate.status]}`}
-									>
+								<td>
+									<span className={`badge ${affiliatesStatusColors[affiliate.status]}`}>
 										{affiliate.status}
 									</span>
 								</td>
-								<td className="px-6 py-4 text-gray-500">
+								<td className="text-gray-500">
 									{new Date(affiliate.created_at).toLocaleDateString()}
 								</td>
-								<td className="px-6 py-4">
+								<td>
 									<div className="flex items-center gap-2">
 										{affiliate.status !== 'approved' && (
 											<button
 												onClick={() =>
 													handleStatusUpdate(affiliate, 'approved')
 												}
-												className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded hover:bg-green-200"
+												className="btn-xs btn-success"
 											>
 												Approve
 											</button>
@@ -166,14 +161,14 @@ export const AffiliatesPage = () => {
 												onClick={() =>
 													handleStatusUpdate(affiliate, 'rejected')
 												}
-												className="text-xs px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200"
+												className="btn-xs btn-danger"
 											>
 												Reject
 											</button>
 										)}
 										<button
 											onClick={() => handleDelete(affiliate.id)}
-											className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded hover:bg-gray-200"
+											className="btn-xs btn-secondary"
 										>
 											Delete
 										</button>
@@ -185,8 +180,12 @@ export const AffiliatesPage = () => {
 				</table>
 
 				{affiliates.length === 0 && (
-					<div className="text-center py-12 text-gray-400">
-						No affiliates found
+					<div className="text-center py-16">
+						<svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+						</svg>
+						<p className="text-gray-500 font-medium">No affiliates found</p>
+						<p className="text-gray-400 text-sm mt-1">Try adjusting your filter or add new affiliates</p>
 					</div>
 				)}
 			</div>

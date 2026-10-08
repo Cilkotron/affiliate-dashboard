@@ -30,9 +30,9 @@ export const LinkForm = ({
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className="space-y-4">
+		<form onSubmit={handleSubmit} className="space-y-5">
 			<div>
-				<label className="block text-sm font-medium text-gray-700 mb-1">
+				<label className="block text-sm font-semibold text-gray-700 mb-2">
 					Program
 				</label>
 				<select
@@ -40,7 +40,7 @@ export const LinkForm = ({
 					onChange={(e) =>
 						setForm({ ...form, program_id: parseInt(e.target.value) })
 					}
-					className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+					className="input cursor-pointer"
 					required
 				>
 					{activePrograms.map((p) => (
@@ -50,14 +50,14 @@ export const LinkForm = ({
 					))}
 				</select>
 				{activePrograms.length === 0 && (
-					<p className="text-xs text-red-500 mt-1">
+					<p className="text-xs text-error-600 mt-2 font-medium">
 						No active programs. Join an active program first.
 					</p>
 				)}
 			</div>
 
 			<div>
-				<label className="block text-sm font-medium text-gray-700 mb-1">
+				<label className="block text-sm font-semibold text-gray-700 mb-2">
 					Original URL
 				</label>
 				<input
@@ -65,23 +65,23 @@ export const LinkForm = ({
 					value={form.original_url}
 					onChange={(e) => setForm({ ...form, original_url: e.target.value })}
 					placeholder="https://example.com/products"
-					className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+					className="input"
 					required
 				/>
 			</div>
 
-			<div className="flex justify-end gap-2 pt-2">
+			<div className="flex justify-end gap-3 pt-4">
 				<button
 					type="button"
 					onClick={onCancel}
-					className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800"
+					className="btn-secondary"
 				>
 					Cancel
 				</button>
 				<button
 					type="submit"
 					disabled={activePrograms.length === 0}
-					className="px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+					className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
 				>
 					Create Link
 				</button>

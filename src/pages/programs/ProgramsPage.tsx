@@ -10,6 +10,7 @@ import type { Program, AffiliateProgram } from '../../types';
 import { programsStatusColors } from '../../assets/colors';
 import { Modal } from '../../components/shared/Modal';
 import { ProgramForm } from './ProgramForm';
+import { TableSkeleton } from '../../components/shared/Skeleton';
 
 const emptyForm = {
 	name: '',
@@ -128,16 +129,19 @@ export const ProgramsPage = () => {
 		}
 	};
 
-	if (loading) return <div className="text-gray-500">Loading...</div>;
+	if (loading) return <TableSkeleton />;
 
 	return (
-		<div>
+		<div className="animate-fade-in">
 			<div className="flex items-center justify-between mb-6">
-				<h1 className="text-2xl font-bold text-gray-800">Programs</h1>
+				<div>
+					<h1 className="text-3xl font-display font-bold text-gray-900">Programs</h1>
+					<p className="text-gray-500 mt-1">Manage affiliate programs</p>
+				</div>
 				{isAdmin && (
 					<button
 						onClick={openCreate}
-						className="bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-blue-700"
+						className="btn-primary"
 					>
 						+ New Program
 					</button>
@@ -145,76 +149,64 @@ export const ProgramsPage = () => {
 			</div>
 
 			{error && (
-				<div className="bg-red-50 text-red-600 p-3 rounded mb-4 text-sm">
-					{error}
+				<div className="bg-gradient-to-r from-error-50 to-error-100 border border-error-200 text-error-700 p-4 rounded-xl mb-6 text-sm font-medium animate-slide-in">
+					<div className="flex items-center gap-2">
+						<svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						{error}
+					</div>
 				</div>
 			)}
 
-			<div className="bg-white rounded-lg shadow overflow-hidden">
-				<table className="w-full text-sm">
-					<thead className="bg-gray-50 border-b border-gray-200">
+			<div className="table-container">
+				<table className="table">
+					<thead>
 						<tr>
-							<th className="text-left px-6 py-3 text-gray-500 font-medium">
-								Name
-							</th>
-							<th className="text-left px-6 py-3 text-gray-500 font-medium">
-								Description
-							</th>
-							<th className="text-left px-6 py-3 text-gray-500 font-medium">
-								Commission
-							</th>
-							{isAdmin && (
-								<th className="text-left px-6 py-3 text-gray-500 font-medium">
-									Status
-								</th>
-							)}
-							<th className="text-left px-6 py-3 text-gray-500 font-medium">
-								Created
-							</th>
-
-							<th className="text-left px-6 py-3 text-gray-500 font-medium">
-								Actions
-							</th>
+							<th>Name</th>
+							<th>Description</th>
+							<th>Commission</th>
+							{isAdmin && <th>Status</th>}
+							<th>Created</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
-					<tbody className="divide-y divide-gray-100">
+					<tbody>
 						{visiblePrograms.map((program) => (
-							<tr key={program.id} className="hover:bg-gray-50">
-								<td className="px-6 py-4 font-medium text-gray-800">
+							<tr key={program.id}>
+								<td className="font-semibold text-gray-900">
 									{program.name}
 								</td>
-								<td className="px-6 py-4 text-gray-600 max-w-xs truncate">
+								<td className="text-gray-600 max-w-xs truncate">
 									{program.description ?? (
 										<span className="text-gray-400">—</span>
 									)}
 								</td>
-								<td className="px-6 py-4 text-gray-800 font-medium">
+								<td className="text-gray-900 font-semibold">
 									{program.commission_rate}%
 								</td>
 								{isAdmin && (
-									<td className="px-6 py-4">
-										<span
-											className={`px-2 py-1 rounded-full text-xs font-medium ${programsStatusColors[program.status]}`}
-										>
+									<td>
+										<span className={`badge ${programsStatusColors[program.status]}`}>
 											{program.status}
 										</span>
 									</td>
 								)}
-								<td className="px-6 py-4 text-gray-500">
+								<td className="text-gray-500">
 									{new Date(program.created_at).toLocaleDateString()}
 								</td>
-								<td className="px-6 py-4">
+								<td>
 									{isAdmin ? (
 										<div className="flex items-center gap-2">
 											<button
 												onClick={() => openEdit(program)}
-												className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
+												className="btn-xs btn-primary"
 											>
 												Edit
 											</button>
 											<button
 												onClick={() => handleDelete(program.id)}
-												className="text-xs px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200"
+												className="btn-xs btn-danger"
 											>
 												Delete
 											</button>
@@ -222,14 +214,14 @@ export const ProgramsPage = () => {
 									) : isJoined(program.id) ? (
 										<button
 											onClick={() => handleLeave(program.id)}
-											className="text-xs px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200"
+											className="btn-xs btn-danger"
 										>
 											Leave
 										</button>
 									) : (
 										<button
 											onClick={() => handleJoin(program.id)}
-											className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded hover:bg-green-200"
+											className="btn-xs btn-success"
 											disabled={program.status === 'inactive'}
 										>
 											Join
@@ -242,8 +234,12 @@ export const ProgramsPage = () => {
 				</table>
 
 				{programs.length === 0 && (
-					<div className="text-center py-12 text-gray-400">
-						No programs found
+					<div className="text-center py-16">
+						<svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+						</svg>
+						<p className="text-gray-500 font-medium">No programs found</p>
+						<p className="text-gray-400 text-sm mt-1">Create your first affiliate program</p>
 					</div>
 				)}
 			</div>
