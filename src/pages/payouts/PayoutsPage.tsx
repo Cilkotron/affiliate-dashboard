@@ -95,7 +95,7 @@ export const PayoutsPage = () => {
 					<p className="text-subheading mt-1">Manage affiliate payouts</p>
 				</div>
 
-				<div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+				<div className="flex justify-end items-center gap-2 sm:gap-3">
 					{!isAdmin && (
 						<button
 							onClick={() => setShowModal(true)}
