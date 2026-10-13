@@ -108,8 +108,17 @@
     border-color: #334155;
   }
 
+  .table-wrapper {
+    @apply overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0;
+  }
+
   .table {
-    @apply w-full text-sm;
+    @apply w-full text-sm min-w-[600px];
+  }
+
+  /* Main content scroll */
+  .main-content {
+    @apply overflow-y-auto hide-scrollbar;
   }
 
   .table thead {
@@ -304,6 +313,50 @@
 
   .dark .text-body-strong {
     color: #f1f5f9;
+  }
+
+  /* Responsive table cell padding */
+  @media (max-width: 640px) {
+    .table td,
+    .table th {
+      @apply px-3 py-2 text-xs;
+    }
+  }
+
+  /* Hide scrollbars but keep functionality */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Custom scrollbar for table */
+  .table-wrapper::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .table-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .table-wrapper::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+  }
+
+  .dark .table-wrapper::-webkit-scrollbar-thumb {
+    background: #475569;
+  }
+
+  .table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+
+  .dark .table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
   }
 }
 

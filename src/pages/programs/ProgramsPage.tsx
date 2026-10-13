@@ -133,9 +133,9 @@ export const ProgramsPage = () => {
 
 	return (
 		<div className="animate-fade-in">
-			<div className="flex items-center justify-between mb-6">
+			<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
 				<div>
-					<h1 className="text-3xl font-display font-bold text-heading">Programs</h1>
+					<h1 className="text-2xl sm:text-3xl font-display font-bold text-heading">Programs</h1>
 					<p className="text-subheading mt-1">Manage affiliate programs</p>
 				</div>
 				{isAdmin && (
@@ -160,7 +160,8 @@ export const ProgramsPage = () => {
 			)}
 
 			<div className="table-container">
-				<table className="table">
+				<div className="table-wrapper">
+					<table className="table">
 					<thead>
 						<tr>
 							<th>Name</th>
@@ -197,7 +198,7 @@ export const ProgramsPage = () => {
 								</td>
 								<td>
 									{isAdmin ? (
-										<div className="flex items-center gap-2">
+										<div className="flex items-center gap-1 sm:gap-2 flex-wrap">
 											<button
 												onClick={() => openEdit(program)}
 												className="btn-xs btn-primary"
@@ -232,6 +233,7 @@ export const ProgramsPage = () => {
 						))}
 					</tbody>
 				</table>
+				</div>
 
 				{programs.length === 0 && (
 					<div className="text-center py-16">

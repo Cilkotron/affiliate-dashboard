@@ -89,13 +89,13 @@ export const PayoutsPage = () => {
 
 	return (
 		<div className="animate-fade-in">
-			<div className="flex items-center justify-between mb-6">
+			<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
 				<div>
-					<h1 className="text-3xl font-display font-bold text-heading">Payouts</h1>
+					<h1 className="text-2xl sm:text-3xl font-display font-bold text-heading">Payouts</h1>
 					<p className="text-subheading mt-1">Manage affiliate payouts</p>
 				</div>
 
-				<div className="flex items-center gap-3">
+				<div className="flex items-center gap-2 sm:gap-3 flex-wrap">
 					{!isAdmin && (
 						<button
 							onClick={() => setShowModal(true)}
@@ -126,7 +126,8 @@ export const PayoutsPage = () => {
 			)}
 
 			<div className="table-container">
-				<table className="table">
+				<div className="table-wrapper">
+					<table className="table">
 					<thead>
 						<tr>
 							<th>Amount</th>
@@ -184,6 +185,7 @@ export const PayoutsPage = () => {
 						))}
 					</tbody>
 				</table>
+				</div>
 
 				{payouts.length === 0 && (
 					<div className="text-center py-16">

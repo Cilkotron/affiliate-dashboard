@@ -41,9 +41,9 @@ export const ClicksPage = () => {
 
 	return (
 		<div className="animate-fade-in">
-			<div className="flex items-center justify-between mb-6">
+			<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
 				<div>
-					<h1 className="text-3xl font-display font-bold text-heading">Clicks</h1>
+					<h1 className="text-2xl sm:text-3xl font-display font-bold text-heading">Clicks</h1>
 					<p className="text-subheading mt-1">Track link clicks</p>
 				</div>
 			</div>
@@ -60,7 +60,8 @@ export const ClicksPage = () => {
 			)}
 
 			<div className="table-container">
-				<table className="table">
+				<div className="table-wrapper">
+					<table className="table">
 					<thead>
 						<tr>
 							<th>Slug</th>
@@ -105,6 +106,7 @@ export const ClicksPage = () => {
 						))}
 					</tbody>
 				</table>
+				</div>
 
 				{clicks.length === 0 && (
 					<div className="text-center py-16">

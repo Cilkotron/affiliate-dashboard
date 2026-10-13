@@ -8,10 +8,10 @@ interface ModalProps {
 
 export const Modal = ({ title, onClose, children }: ModalProps) => {
     return (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
-            <div className="modal-content">
-                <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-xl font-display font-semibold text-heading">{title}</h2>
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 sm:p-6 animate-fade-in">
+            <div className="modal-content w-full max-w-md">
+                <div className="flex items-center justify-between mb-4 sm:mb-6">
+                    <h2 className="text-lg sm:text-xl font-display font-semibold text-heading">{title}</h2>
                     <button
                         onClick={onClose}
                         className="w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 flex items-center justify-center transition-all duration-200"
