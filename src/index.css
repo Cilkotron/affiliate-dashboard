@@ -10,6 +10,11 @@
     font-family: 'Inter', 'Red Hat Display', system-ui, sans-serif;
   }
 
+  .dark body {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+    color: #f1f5f9;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-display font-semibold tracking-tight;
   }
@@ -37,6 +42,16 @@
     @apply bg-white text-gray-700 px-4 py-2 rounded-lg font-medium border border-gray-300 shadow-sm hover:shadow-md hover:bg-gray-50 transition-all duration-200;
   }
 
+  .dark .btn-secondary {
+    background: linear-gradient(to right, #334155, #1e293b);
+    color: #f1f5f9;
+    border-color: #475569;
+  }
+
+  .dark .btn-secondary:hover {
+    background: linear-gradient(to right, #475569, #334155);
+  }
+
   .btn-danger {
     @apply bg-gradient-to-r from-error-500 to-error-600 text-white px-4 py-2 rounded-lg font-medium shadow-md hover:shadow-lg hover:from-error-600 hover:to-error-700 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0;
   }
@@ -58,6 +73,12 @@
     @apply bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden;
   }
 
+  .dark .card {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-color: #334155;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  }
+
   .card-hover {
     @apply hover:shadow-xl transition-shadow duration-300;
   }
@@ -65,6 +86,12 @@
   /* Modern input styles */
   .input {
     @apply w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 bg-white;
+  }
+
+  .dark .input {
+    background-color: #334155;
+    border-color: #334155;
+    color: #f1f5f9;
   }
 
   .input:focus {
@@ -76,6 +103,11 @@
     @apply bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden;
   }
 
+  .dark .table-container {
+    background-color: #1e293b;
+    border-color: #334155;
+  }
+
   .table {
     @apply w-full text-sm;
   }
@@ -84,12 +116,29 @@
     @apply bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200;
   }
 
+  .dark .table thead {
+    background: linear-gradient(to right, #334155, #1e293b);
+    border-color: #334155;
+  }
+
   .table th {
     @apply text-left px-6 py-4 text-gray-600 font-semibold text-xs uppercase tracking-wider;
   }
 
+  .dark .table th {
+    color: #94a3b8;
+  }
+
   .table tbody tr {
     @apply border-b border-gray-100 hover:bg-gradient-to-r hover:from-gray-50 hover:to-transparent transition-colors duration-150;
+  }
+
+  .dark .table tbody tr {
+    border-color: #334155;
+  }
+
+  .dark .table tbody tr:hover {
+    background: linear-gradient(to right, rgba(51, 65, 85, 0.5), transparent);
   }
 
   .table tbody tr:last-child {
@@ -109,25 +158,61 @@
     @apply bg-gradient-to-r from-success-100 to-success-200 text-success-700 border border-success-300;
   }
 
+  .dark .badge-success {
+    background: linear-gradient(to right, #166534, #14532d);
+    color: #bbf7d0;
+    border-color: #22c55e;
+  }
+
   .badge-warning {
     @apply bg-gradient-to-r from-warning-100 to-warning-200 text-warning-700 border border-warning-300;
+  }
+
+  .dark .badge-warning {
+    background: linear-gradient(to right, #92400e, #78350f);
+    color: #fde68a;
+    border-color: #f59e0b;
   }
 
   .badge-error {
     @apply bg-gradient-to-r from-error-100 to-error-200 text-error-700 border border-error-300;
   }
 
+  .dark .badge-error {
+    background: linear-gradient(to right, #991b1b, #7f1d1d);
+    color: #fecaca;
+    border-color: #ef4444;
+  }
+
   .badge-info {
     @apply bg-gradient-to-r from-info-100 to-info-200 text-info-700 border border-info-300;
+  }
+
+  .dark .badge-info {
+    background: linear-gradient(to right, #1e40af, #1e3a8a);
+    color: #bfdbfe;
+    border-color: #3b82f6;
   }
 
   .badge-neutral {
     @apply bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 border border-gray-300;
   }
 
+  .dark .badge-neutral {
+    background: linear-gradient(to right, #475569, #334155);
+    color: #e2e8f0;
+    border-color: #64748b;
+  }
+
   /* Glassmorphism effect */
   .glass {
     @apply bg-white/80 backdrop-blur-md border border-white/20;
+  }
+
+  .dark .glass {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.9) 100%);
+    backdrop-filter: blur(12px);
+    border-color: #334155;
   }
 
   .glass-dark {
@@ -137,6 +222,88 @@
   /* Loading skeleton */
   .skeleton {
     @apply bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 bg-[length:1000px_100%] animate-shimmer rounded;
+  }
+
+  .dark .skeleton {
+    background: linear-gradient(to right, #334155, #1e293b, #334155);
+    background-size: 1000px 100%;
+  }
+
+  /* Status filter select */
+  .status-filter {
+    @apply appearance-none bg-white border border-gray-200 rounded-lg px-4 py-2.5 pr-10 text-sm font-medium text-gray-700 cursor-pointer hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 shadow-sm;
+  }
+
+  .dark .status-filter {
+    background: linear-gradient(to right, #334155, #1e293b);
+    border-color: #475569;
+    color: #f1f5f9;
+  }
+
+  .dark .status-filter:hover {
+    border-color: #64748b;
+  }
+
+  /* Modal */
+  .modal-content {
+    @apply bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 animate-scale-in border border-gray-100;
+  }
+
+  .dark .modal-content {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-color: #334155;
+  }
+
+  /* Alert boxes */
+  .alert-error {
+    @apply bg-gradient-to-r from-error-50 to-error-100 border border-error-200 text-error-700 p-4 rounded-xl text-sm font-medium;
+  }
+
+  .dark .alert-error {
+    background: linear-gradient(to right, rgba(153, 27, 27, 0.3), rgba(127, 29, 29, 0.3));
+    border-color: #7f1d1d;
+    color: #fecaca;
+  }
+
+  /* Text utilities */
+  .text-heading {
+    @apply text-gray-900;
+  }
+
+  .dark .text-heading {
+    color: #f1f5f9;
+  }
+
+  .text-subheading {
+    @apply text-gray-500;
+  }
+
+  .dark .text-subheading {
+    color: #94a3b8;
+  }
+
+  .text-label {
+    @apply text-gray-700;
+  }
+
+  .dark .text-label {
+    color: #e2e8f0;
+  }
+
+  .text-body {
+    @apply text-gray-600;
+  }
+
+  .dark .text-body {
+    color: #cbd5e1;
+  }
+
+  .text-body-strong {
+    @apply text-gray-900;
+  }
+
+  .dark .text-body-strong {
+    color: #f1f5f9;
   }
 }
 

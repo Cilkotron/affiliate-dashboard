@@ -135,8 +135,8 @@ export const ProgramsPage = () => {
 		<div className="animate-fade-in">
 			<div className="flex items-center justify-between mb-6">
 				<div>
-					<h1 className="text-3xl font-display font-bold text-gray-900">Programs</h1>
-					<p className="text-gray-500 mt-1">Manage affiliate programs</p>
+					<h1 className="text-3xl font-display font-bold text-heading">Programs</h1>
+					<p className="text-subheading mt-1">Manage affiliate programs</p>
 				</div>
 				{isAdmin && (
 					<button
@@ -149,7 +149,7 @@ export const ProgramsPage = () => {
 			</div>
 
 			{error && (
-				<div className="bg-gradient-to-r from-error-50 to-error-100 border border-error-200 text-error-700 p-4 rounded-xl mb-6 text-sm font-medium animate-slide-in">
+				<div className="alert-error mb-6 animate-slide-in">
 					<div className="flex items-center gap-2">
 						<svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -174,15 +174,15 @@ export const ProgramsPage = () => {
 					<tbody>
 						{visiblePrograms.map((program) => (
 							<tr key={program.id}>
-								<td className="font-semibold text-gray-900">
+								<td className="font-semibold text-body-strong">
 									{program.name}
 								</td>
-								<td className="text-gray-600 max-w-xs truncate">
+								<td className="text-body max-w-xs truncate">
 									{program.description ?? (
-										<span className="text-gray-400">—</span>
+										<span className="text-gray-400 dark:text-gray-500">—</span>
 									)}
 								</td>
-								<td className="text-gray-900 font-semibold">
+								<td className="text-body-strong font-semibold">
 									{program.commission_rate}%
 								</td>
 								{isAdmin && (
@@ -192,7 +192,7 @@ export const ProgramsPage = () => {
 										</span>
 									</td>
 								)}
-								<td className="text-gray-500">
+								<td className="text-subheading">
 									{new Date(program.created_at).toLocaleDateString()}
 								</td>
 								<td>
@@ -235,11 +235,11 @@ export const ProgramsPage = () => {
 
 				{programs.length === 0 && (
 					<div className="text-center py-16">
-						<svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<svg className="w-16 h-16 mx-auto text-gray-300 dark:text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
 						</svg>
-						<p className="text-gray-500 font-medium">No programs found</p>
-						<p className="text-gray-400 text-sm mt-1">Create your first affiliate program</p>
+						<p className="text-subheading font-medium">No programs found</p>
+						<p className="text-gray-400 dark:text-gray-500 text-sm mt-1">Create your first affiliate program</p>
 					</div>
 				)}
 			</div>

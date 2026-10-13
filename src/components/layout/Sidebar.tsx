@@ -36,8 +36,8 @@ export const Sidebar = () => {
 	const links = isAdmin ? adminLinks : affiliateLinks;
 
 	return (
-		<aside className="w-64 bg-gradient-to-b from-gray-900 via-gray-900 to-primary-950 min-h-screen flex flex-col shadow-2xl">
-			<div className="p-6 border-b border-gray-800/50">
+		<aside className="w-64 bg-gradient-to-b from-gray-900 via-gray-900 to-primary-950 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 min-h-screen flex flex-col shadow-2xl border border-gray-800/50">
+			<div className="p-6 border-b border-gray-800/50 dark:border-slate-700">
 				<h1 className="text-white font-display font-bold text-xl tracking-tight">
 					{isAdmin ? 'Affiliate Admin' : 'Affiliate Dashboard'}
 				</h1>
@@ -66,12 +66,12 @@ export const Sidebar = () => {
 				))}
 			</nav>
 
-			<div className="p-4 border-t border-gray-800/50">
+			{/* <div className="p-4 border-t border-gray-800/50 dark:border-slate-700">
 				<div className="bg-gradient-to-r from-primary-600/20 to-accent-600/20 rounded-lg p-4 border border-primary-500/20">
 					<p className="text-xs text-gray-400 mb-2">Need help?</p>
 					<p className="text-xs text-primary-300">Contact support</p>
 				</div>
-			</div>
+			</div> */}
 		</aside>
 	);
 };

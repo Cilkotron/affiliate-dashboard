@@ -91,8 +91,8 @@ export const PayoutsPage = () => {
 		<div className="animate-fade-in">
 			<div className="flex items-center justify-between mb-6">
 				<div>
-					<h1 className="text-3xl font-display font-bold text-gray-900">Payouts</h1>
-					<p className="text-gray-500 mt-1">Manage affiliate payouts</p>
+					<h1 className="text-3xl font-display font-bold text-heading">Payouts</h1>
+					<p className="text-subheading mt-1">Manage affiliate payouts</p>
 				</div>
 
 				<div className="flex items-center gap-3">
@@ -115,10 +115,10 @@ export const PayoutsPage = () => {
 			</div>
 
 			{error && (
-				<div className="bg-gradient-to-r from-error-50 to-error-100 border border-error-200 text-error-700 p-4 rounded-xl mb-6 text-sm font-medium animate-slide-in">
+				<div className="alert-error mb-6 animate-slide-in">
 					<div className="flex items-center gap-2">
 						<svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12 a9 9 0 11-18 0 9 9 0 0118 0z" />
 						</svg>
 						{error}
 					</div>
@@ -139,7 +139,7 @@ export const PayoutsPage = () => {
 					<tbody>
 						{payouts.map((payout) => (
 							<tr key={payout.id}>
-								<td className="font-semibold text-gray-900">
+								<td className="font-semibold text-body-strong">
 									${payout.amount}
 								</td>
 								<td>
@@ -148,11 +148,11 @@ export const PayoutsPage = () => {
 									</span>
 								</td>
 								{isAdmin && (
-									<td className="text-gray-900 font-medium">
+									<td className="text-body-strong font-medium">
 										{payout.first_name} {payout.last_name}
 									</td>
 								)}
-								<td className="text-gray-500">
+								<td className="text-subheading">
 									{new Date(payout.created_at).toLocaleDateString()}
 								</td>
 								<td>
@@ -165,7 +165,7 @@ export const PayoutsPage = () => {
 												Mark As Paid
 											</button>
 										) : (
-											<span className="text-gray-400">—</span>
+											<span className="text-gray-400 dark:text-gray-500">—</span>
 										)
 									) : (
 										<div className="flex items-center gap-2">
@@ -173,7 +173,7 @@ export const PayoutsPage = () => {
 												Paid
 											</span>
 											{payout.paid_at && (
-												<span className="text-sm text-gray-400">
+												<span className="text-sm text-gray-400 dark:text-gray-500">
 													{new Date(payout.paid_at).toLocaleDateString()}
 												</span>
 											)}
@@ -187,11 +187,11 @@ export const PayoutsPage = () => {
 
 				{payouts.length === 0 && (
 					<div className="text-center py-16">
-						<svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<svg className="w-16 h-16 mx-auto text-gray-300 dark:text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
 						</svg>
-						<p className="text-gray-500 font-medium">No payouts found</p>
-						<p className="text-gray-400 text-sm mt-1">Payouts will appear here when requested</p>
+						<p className="text-subheading font-medium">No payouts found</p>
+						<p className="text-gray-400 dark:text-gray-500 text-sm mt-1">Payouts will appear here when requested</p>
 					</div>
 				)}
 			</div>
@@ -206,13 +206,13 @@ export const PayoutsPage = () => {
 
 			{showModal && (
 				<Modal title="Request Payout" onClose={() => setShowModal(false)}>
-					<div className="mb-4 p-4 bg-gradient-to-r from-info-50 to-info-100 border border-info-200 rounded-xl text-sm text-info-700">
+					<div className="mb-4 p-4 bg-gradient-to-r from-info-50 to-info-100 border border-info-200 rounded-xl text-sm text-info-700 dark:from-info-900/30 dark:to-info-800/30 dark:border-info-700 dark:text-info-300">
 						Available for payout:{' '}
 						<span className="font-bold">${available.toFixed(2)}</span>
 					</div>
 					<form onSubmit={handleCreate} className="space-y-5">
 						<div>
-							<label className="block text-sm font-semibold text-gray-700 mb-2">
+							<label className="block text-sm font-semibold text-label mb-2">
 								Amount
 							</label>
 							<input

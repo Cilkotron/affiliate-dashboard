@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { LoginPage } from './pages/auth/LoginPage';
 import { Layout } from './components/layout/Layout';
@@ -13,8 +14,9 @@ import { PayoutsPage } from './pages/payouts/PayoutsPage';
 function App() {
 	return (
 		<BrowserRouter>
-			<AuthProvider>
-				<Routes>
+			<ThemeProvider>
+				<AuthProvider>
+					<Routes>
 					<Route path="/login" element={<LoginPage />} />
 					<Route
 						path="/"
@@ -29,8 +31,8 @@ function App() {
 							element={
 								<div className="animate-fade-in">
 									<div className="mb-6">
-										<h1 className="text-3xl font-display font-bold text-gray-900">Dashboard</h1>
-										<p className="text-gray-500 mt-1">Welcome to your affiliate dashboard</p>
+										<h1 className="text-3xl font-display font-bold text-heading">Dashboard</h1>
+										<p className="text-subheading mt-1">Welcome to your affiliate dashboard</p>
 									</div>
 									<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 										<div className="card p-6 card-hover">
@@ -41,8 +43,8 @@ function App() {
 													</svg>
 												</div>
 											</div>
-											<h3 className="text-2xl font-bold text-gray-900">Affiliates</h3>
-											<p className="text-gray-500 text-sm mt-1">Manage your partners</p>
+											<h3 className="text-2xl font-bold text-heading">Affiliates</h3>
+											<p className="text-subheading text-sm mt-1">Manage your partners</p>
 										</div>
 										<div className="card p-6 card-hover">
 											<div className="flex items-center justify-between mb-4">
@@ -52,8 +54,8 @@ function App() {
 													</svg>
 												</div>
 											</div>
-											<h3 className="text-2xl font-bold text-gray-900">Conversions</h3>
-											<p className="text-gray-500 text-sm mt-1">Track performance</p>
+											<h3 className="text-2xl font-bold text-heading">Conversions</h3>
+											<p className="text-subheading text-sm mt-1">Track performance</p>
 										</div>
 										<div className="card p-6 card-hover">
 											<div className="flex items-center justify-between mb-4">
@@ -63,8 +65,8 @@ function App() {
 													</svg>
 												</div>
 											</div>
-											<h3 className="text-2xl font-bold text-gray-900">Programs</h3>
-											<p className="text-gray-500 text-sm mt-1">Manage campaigns</p>
+											<h3 className="text-2xl font-bold text-heading">Programs</h3>
+											<p className="text-subheading text-sm mt-1">Manage campaigns</p>
 										</div>
 									</div>
 								</div>
@@ -80,7 +82,8 @@ function App() {
 					<Route path="*" element={<Navigate to="/" replace />} />
 				</Routes>
 			</AuthProvider>
-		</BrowserRouter>
+		</ThemeProvider>
+	</BrowserRouter>
 	);
 }
 

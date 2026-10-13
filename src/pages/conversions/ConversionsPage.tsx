@@ -67,8 +67,8 @@ export const ConversionsPage = () => {
 		<div className="animate-fade-in">
 			<div className="flex items-center justify-between mb-6">
 				<div>
-					<h1 className="text-3xl font-display font-bold text-gray-900">Conversions</h1>
-					<p className="text-gray-500 mt-1">Track affiliate conversions</p>
+					<h1 className="text-3xl font-display font-bold text-heading">Conversions</h1>
+					<p className="text-subheading mt-1">Track affiliate conversions</p>
 				</div>
 				<div className="flex justify-end items-center">
 					<StatusFilter<ConversionStatusFilter>
@@ -81,7 +81,7 @@ export const ConversionsPage = () => {
 			</div>
 
 			{error && (
-				<div className="bg-gradient-to-r from-error-50 to-error-100 border border-error-200 text-error-700 p-4 rounded-xl mb-6 text-sm font-medium animate-slide-in">
+				<div className="alert-error mb-6 animate-slide-in">
 					<div className="flex items-center gap-2">
 						<svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -106,23 +106,23 @@ export const ConversionsPage = () => {
 					<tbody>
 						{conversions.map((conversion) => (
 							<tr key={conversion.id}>
-								<td className="font-semibold text-gray-900">
+								<td className="font-semibold text-body-strong">
 									{conversion.amount}
 								</td>
-								<td className="text-gray-600 max-w-xs truncate">
+								<td className="text-body max-w-xs truncate">
 									{conversion.commission}
 								</td>
-								<td className="text-gray-600 max-w-xs truncate">
+								<td className="text-body max-w-xs truncate">
 									<span className={`badge ${conversionsStatusColors[conversion.status]}`}>
 										{conversion.status}
 									</span>
 								</td>
 								{isAdmin && (
-									<td className="text-gray-900 font-medium">
+									<td className="text-body-strong font-medium">
 										{conversion.first_name} {conversion.last_name}
 									</td>
 								)}
-								<td className="text-gray-600">{conversion.program_name}</td>
+								<td className="text-body">{conversion.program_name}</td>
 
 								{isAdmin && (
 									<td>
@@ -160,11 +160,11 @@ export const ConversionsPage = () => {
 
 				{conversions.length === 0 && (
 					<div className="text-center py-16">
-						<svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<svg className="w-16 h-16 mx-auto text-gray-300 dark:text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 						</svg>
-						<p className="text-gray-500 font-medium">No conversions found</p>
-						<p className="text-gray-400 text-sm mt-1">Conversions will appear here when tracked</p>
+						<p className="text-subheading font-medium">No conversions found</p>
+						<p className="text-gray-400 dark:text-gray-500 text-sm mt-1">Conversions will appear here when tracked</p>
 					</div>
 				)}
 			</div>

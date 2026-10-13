@@ -11,7 +11,7 @@ export const ProgramForm = ({
 	return (
 		<form onSubmit={onSubmit} className="space-y-5">
 			<div>
-				<label className="block text-sm font-semibold text-gray-700 mb-2">
+				<label className="block text-sm font-semibold text-label mb-2">
 					Name
 				</label>
 				<input
@@ -25,7 +25,7 @@ export const ProgramForm = ({
 			</div>
 
 			<div>
-				<label className="block text-sm font-semibold text-gray-700 mb-2">
+				<label className="block text-sm font-semibold text-label mb-2">
 					Description
 				</label>
 				<textarea
@@ -38,7 +38,7 @@ export const ProgramForm = ({
 			</div>
 
 			<div>
-				<label className="block text-sm font-semibold text-gray-700 mb-2">
+				<label className="block text-sm font-semibold text-label mb-2">
 					Commission Rate (%)
 				</label>
 				<input
@@ -57,7 +57,7 @@ export const ProgramForm = ({
 			</div>
 
 			<div>
-				<label className="block text-sm font-semibold text-gray-700 mb-2">
+				<label className="block text-sm font-semibold text-label mb-2">
 					Status
 				</label>
 				<select

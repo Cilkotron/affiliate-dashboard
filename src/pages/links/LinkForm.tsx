@@ -32,7 +32,7 @@ export const LinkForm = ({
 	return (
 		<form onSubmit={handleSubmit} className="space-y-5">
 			<div>
-				<label className="block text-sm font-semibold text-gray-700 mb-2">
+				<label className="block text-sm font-semibold text-label mb-2">
 					Program
 				</label>
 				<select
@@ -50,14 +50,14 @@ export const LinkForm = ({
 					))}
 				</select>
 				{activePrograms.length === 0 && (
-					<p className="text-xs text-error-600 mt-2 font-medium">
+					<p className="text-xs text-error-600 dark:text-error-400 mt-2 font-medium">
 						No active programs. Join an active program first.
 					</p>
 				)}
 			</div>
 
 			<div>
-				<label className="block text-sm font-semibold text-gray-700 mb-2">
+				<label className="block text-sm font-semibold text-label mb-2">
 					Original URL
 				</label>
 				<input

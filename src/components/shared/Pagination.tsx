@@ -31,7 +31,7 @@ export const Pagination = ({
 						<button
 							onClick={() => onPageChange(page - 1)}
 							disabled={page === 1}
-							className="px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-700 font-medium hover:bg-gray-50 hover:border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm"
+							className="px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-700 font-medium hover:bg-gray-50 hover:border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:border-gray-500"
 						>
 							Previous
 						</button>
@@ -44,7 +44,7 @@ export const Pagination = ({
 							className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
 								page === pageNumber
 									? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-lg shadow-primary-500/25'
-									: 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 shadow-sm'
+									: 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 shadow-sm dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:border-gray-500'
 							}`}
 						>
 							{pageNumber}
@@ -55,7 +55,7 @@ export const Pagination = ({
 						<button
 							onClick={() => onPageChange(page + 1)}
 							disabled={page === totalPages}
-							className="px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-700 font-medium hover:bg-gray-50 hover:border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm"
+							className="px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-700 font-medium hover:bg-gray-50 hover:border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm dark:bg-gradient-to-r dark:from-gray-700 dark:to-gray-800 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:border-gray-500"
 						>
 							Next
 						</button>
@@ -64,7 +64,7 @@ export const Pagination = ({
 			)}
 
 			<div className="flex justify-center pt-2">
-				<span className="text-sm text-gray-500 font-medium">
+				<span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
 					Showing {startItem}-{endItem} of {totalItems} items
 				</span>
 			</div>

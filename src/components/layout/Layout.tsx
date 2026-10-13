@@ -4,7 +4,7 @@ import { Navbar } from './Navbar';
 
 export const Layout = () => {
     return (
-        <div className="flex min-h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-slate-100">
+        <div className="flex min-h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-slate-100 dark:from-slate-900 dark:via-slate-900 dark:to-slate-950">
             <Sidebar />
             <div className="flex-1 flex flex-col">
                 <Navbar />
